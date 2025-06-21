@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Environnements virtuels
+env/
+venv/
+ENV/
+.venv/
+
+# Fichiers de configuration sensibles
+.env
+*.env
+
+# Bases de données SQLite
+*.sqlite3
+*.db
+
+# Fichiers de logs
+*.log
+
+# Dossiers de l’éditeur
+.vscode/
+.idea/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
