@@ -1,0 +1,15 @@
+{%extends "base.html"%}
+{%block content%}
+<div class="px-20 flex flex-1 justify-center py-5">
+    <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+        <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Previsions</p></div>
+        {%for prevision in previsions%}
+        <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">{{prevision.date}}</h2>
+        <p class="text-[#0e1a13] text-base font-normal leading-normal pb-3 pt-1 px-4">
+        {{prevision.type}}: {{prevision.valeur}}
+        </p>
+        {%endfor%}
+    </div>
+</div>
+{%endblock%}
+      

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- <div class=" flex flex-1 justify-center py-5"> -->
+<div class="layout-content-container flex flex-col justify-center px-20 flex-1">
+<div class="flex flex-wrap justify-between gap-3 p-4">
+    <div class="flex min-w-72 flex-col gap-3">
+        <div class="flex items-center gap-12 space-x-20">
+            <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight">Inventaire</p>
+            <a href="{{ url_for('inventaires.ajout_materiel') }}"
+            class="bg-[#39e079] hover:bg-[#2ecc71] text-white font-bold py-2 px-4 rounded transition-colors duration-200">
+                + Nouveau materiel
+            </a>
+        </div>
+        <p class="text-[#51946b] text-sm font-normal leading-normal">
+            Gérez vos ressources agricoles        
+        </p>
+    </div>
+</div>
+<div class="pb-3">
+    <div class="flex border-b border-[#d1e6d9] px-4 gap-8">
+        <a class="flex flex-col items-center justify-center border-b-[3px] {{ 'border-b-[#39e079] text-[#0e1a13]' if filtre == 'tout' else 'border-b-transparent text-[#51946b]' }} pb-[13px] pt-4"
+           href="{{ url_for('inventaires.inventaires') }}">
+            <p class="text-sm font-bold leading-normal tracking-[0.015em]">Tout</p>
+        </a>
+        {%for tp in types%}
+        <a class="flex flex-col items-center justify-center border-b-[3px] {{ 'border-b-[#39e079] text-[#0e1a13]' if filtre == tp else 'border-b-transparent text-[#51946b]' }} pb-[13px] pt-4"
+           href="{{ url_for('inventaires.inventaires', type=tp) }}">
+            <p class="text-sm font-bold leading-normal tracking-[0.015em]">{{tp}}</p>
+        </a>
+        {%endfor%}
+    </div>
+</div>
+<div class="px-4 py-3">
+    <label class="flex flex-col min-w-40 h-12 w-full">
+    <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+        <div
+        class="text-[#51946b] flex border-none bg-[#e8f2ec] items-center justify-center pl-4 rounded-l-lg border-r-0"
+        data-icon="MagnifyingGlass"
+        data-size="24px"
+        data-weight="regular"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+            ></path>
+        </svg>
+        </div>
+        <input
+        placeholder="Rechercher un équipement"
+        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0e1a13] focus:outline-0 focus:ring-0 border-none bg-[#e8f2ec] focus:border-none h-full placeholder:text-[#51946b] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+        value=""
+        />
+    </div>
+    </label>
+</div>
+<div class="px-4 py-3 @container">
+    <div class="flex overflow-hidden rounded-lg border border-[#d1e6d9] bg-[#f8fbfa]">
+    <table class="flex-1">
+        <thead>
+        <tr class="bg-[#f8fbfa]">
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-120 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">Nom</th>
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-240 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">Type</th>
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-360 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Quantité
+            </th>
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-480 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">Unité</th>
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-600 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Date d'achat
+            </th>
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-720 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Prix unitaire
+            </th>
+            <th class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-840 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Valeur totale
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for inventaire in inventaires%}
+        <tr class="border-t border-t-[#d1e6d9]">
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e1a13] text-sm font-normal leading-normal">{{inventaire.nom}}</td>
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-240 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">
+            {{inventaire.type}}
+            </td>
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-360 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">{{inventaire.quantite}}</td>
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-480 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">{{inventaire.unite}}</td>
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-600 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">
+            {{inventaire.date_achat.strftime('%Y-%m-%d') if inventaire.date_achat else 'N/A'}}
+            </td>
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-720 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">{{inventaire.prix_unitaire}} fcfa</td>
+            <td class="table-eeff8cde-a223-4062-8356-54ab7223fc64-column-840 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">{{inventaire.valeur_totale}} fcfa</td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    </div>
+    <style>
+                @container(max-width:120px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-120{display: none;}}
+    @container(max-width:240px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-240{display: none;}}
+    @container(max-width:360px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-360{display: none;}}
+    @container(max-width:480px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-480{display: none;}}
+    @container(max-width:600px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-600{display: none;}}
+    @container(max-width:720px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-720{display: none;}}
+    @container(max-width:840px){.table-eeff8cde-a223-4062-8356-54ab7223fc64-column-840{display: none;}}
+    </style>
+</div>
+</div>
+{% endblock content %}
+

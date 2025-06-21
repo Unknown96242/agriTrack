@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="px-20 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div class="flex flex-wrap justify-between gap-3 p-4">
+      <div class="flex min-w-72 flex-col gap-3">
+        <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight">Ajouter un Materiel</p>
+        <p class="text-[#51946b] text-sm font-normal leading-normal">Ajouter un nouveau materiel a votre inventaire</p>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('inventaires.ajout_materiel') }}" class="space-y-6 px-4 py-3">
+      {{ form.hidden_tag() }}
+        {% for champ in champs %}
+            {% if champ in form %}
+            <div>
+                {{ form[champ].label(class="block text-[#0e1a13] text-sm font-medium mb-2") }}
+                {{ form[champ](class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent") }}
+                {% if form[champ].errors %}
+                <div class="text-red-500 text-sm mt-1">{{ form[champ].errors[0] }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+        <div> 
+          {{ form.submit(class="bg-[#39e079] hover:bg-[#2ecc71] text-white font-bold py-2 px-4 rounded transition-colors duration-200") }}
+        </div>
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}

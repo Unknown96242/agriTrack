@@ -1,0 +1,7 @@
+.nav{
+    cursor: pointer;
+}
+.nav:hover{
+    background-color: #e8f2ec;
+    border-radius: 0.5rem
+}

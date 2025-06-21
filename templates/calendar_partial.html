@@ -1,0 +1,65 @@
+<div class="flex flex-wrap items-center justify-center gap-6 p-4">
+  <div class="flex min-w-72 max-w-[336px] flex-1 flex-col gap-0.5">
+    <div class="flex items-center p-1 justify-between">
+      {# Calcul du mois précédent #}
+      {% set prev_month = month - 1 if month > 1 else 12 %}
+      {% set prev_year = year if month > 1 else year - 1 %}
+      {# Calcul du mois suivant #}
+      {% set next_month = month + 1 if month < 12 else 1 %}
+      {% set next_year = year if month < 12 else year + 1 %}
+
+      <a href="{{ url_for('index.calendar_partial', parcelle_id=parcelle_sel.id, year=prev_year, month=prev_month) }}">
+        <div class="text-[#0e1a13] flex size-10 items-center justify-center" data-icon="CaretLeft" data-size="18px" data-weight="regular">
+          <!-- SVG flèche gauche -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
+          </svg>
+        </div>
+      </a>
+      <p class="text-[#0e1a13] text-base font-bold leading-tight flex-1 text-center pr-10">
+        {{ month_name }} {{ year }}
+      </p>
+      <a href="{{ url_for('index.calendar_partial', parcelle_id=parcelle_sel.id, year=next_year, month=next_month) }}">
+        <div class="text-[#0e1a13] flex size-10 items-center justify-center" data-icon="CaretRight" data-size="18px" data-weight="regular">
+          <!-- SVG flèche droite -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+          </svg>
+        </div>
+      </a>
+    </div>
+    <div class="grid grid-cols-7">
+      {% for day_name in ['S','M','T','W','T','F','S'] %}
+        <p class="text-[#0e1a13] text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">{{ day_name }}</p>
+      {% endfor %}
+
+      {# Calcul du premier jour du mois (0=Monday, 6=Sunday) #}
+      {% set first_weekday = first_weekday %}
+      {% for _ in range(first_weekday) %}
+        <div></div>
+      {% endfor %}
+
+      {% for day in range(1, nb_jours+1) %}
+        {% set current_date = date(year, month, day) %}
+        {% if semis and floraison and semis <= current_date <= floraison %}
+          {% if current_date == semis or current_date == floraison %}
+            <!-- Vert foncé pour semis ou floraison -->
+            <button class="h-12 w-full text-white font-bold rounded-full bg-[#39e079]">
+              <div class="flex size-full items-center justify-center rounded-full">{{ day }}</div>
+            </button>
+          {% else %}
+            <!-- Vert clair pour les jours entre -->
+            <button class="h-12 w-full bg-[#e8f2ec] text-[#0e1a13] rounded-full">
+              <div class="flex size-full items-center justify-center rounded-full">{{ day }}</div>
+            </button>
+          {% endif %}
+        {% else %}
+          <!-- Normal -->
+          <button class="h-12 w-full text-[#0e1a13]">
+            <div class="flex size-full items-center justify-center rounded-full">{{ day }}</div>
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  </div>

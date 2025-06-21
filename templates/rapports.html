@@ -1,0 +1,101 @@
+{%extends "base.html"%}
+{%block content%}
+<div class="px-20 flex flex-1 justify-center py-5">
+    <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div class="flex flex-wrap justify-between gap-3 p-4">
+        <div class="flex min-w-72 flex-col gap-3">
+            <div class="flex items-center gap-12 space-x-20">
+                <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight">Rapports de production</p>
+                <a href="{{ url_for('rapports.ajout_rapport') }}"
+                class="bg-[#39e079] hover:bg-[#2ecc71] text-white font-bold py-2 px-4 rounded transition-colors duration-200">
+                    + Nouveau rapport
+                </a>
+            </div>
+            <p class="text-[#51946b] text-sm font-normal leading-normal">
+                Générez des rapports détaillés sur les performances, les coûts, les revenus et les prévisions de votre production agricole.
+            </p>
+        </div>
+    </div>
+    <div class="pb-3">
+        <div class="flex border-b border-[#d1e6d9] px-4 gap-8 items-center">
+            <a class="flex flex-col items-center justify-center border-b-[3px]
+                    {% if annee == None and mois == None %}
+                        border-b-[#39e079] text-[#0e1a13]
+                    {% else %}
+                        border-b-transparent text-[#51946b]
+                    {% endif %}
+                    pb-[13px] pt-4"
+                    href="{{ url_for('rapports.rapports', annee=None, mois=None) }}">
+                    <p class="text-sm font-bold leading-normal tracking-[0.015em]">
+                        Analyse generale
+                    </p>
+                </a>
+            {% for rapport in nav_rapports %}
+                <a class="flex flex-col items-center justify-center border-b-[3px]
+                    {% if annee == rapport.date_generation.year and mois == rapport.date_generation.month %}
+                        border-b-[#39e079] text-[#0e1a13]
+                    {% else %}
+                        border-b-transparent text-[#51946b]
+                    {% endif %}
+                    pb-[13px] pt-4"
+                    href="{{ url_for('rapports.rapports', annee=rapport.date_generation.year, mois=rapport.date_generation.month) }}">
+                    <p class="text-sm font-bold leading-normal tracking-[0.015em]">
+                        {{ rapport.titre }} ({{ rapport.date_generation.strftime('%d/%m/%Y') }})
+                    </p>
+                </a>
+            {% endfor %}
+            {% if autres_rapports %}
+                <select class="ml-4 border rounded px-2 py-1" onchange="window.location.href=this.value;">
+                    <option disabled selected>Autres dates</option>
+                    {% for rapport in autres_rapports %}
+                        <option value="{{ url_for('rapports.rapports', rapport_id=rapport.id) }}">
+                            {{ rapport.titre }} ({{ rapport.date_generation.strftime('%d/%m/%Y') }})
+                        </option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+            Résumé des performances: 
+            {% if mois %}
+                {% set mois_noms = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'] %}
+                <span class="text-[#51946b] font-normal">
+                    {{ mois_noms[mois-1] }}
+                    {% if annee %}{{ ' ' ~ annee }}{% endif %}
+                </span>
+            {% endif %}
+        </h2>    
+        <div class="flex flex-wrap gap-4 p-4">
+        <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Rendement total</p>
+        <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">{{ rendement_total }} kg</p>
+        </div>
+        <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Coût total</p>
+        <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">{{ cout_total }} fcfa</p>
+        </div>
+        <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Revenu total</p>
+        <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">{{ revenu_total }} fcfa</p>
+        </div>
+    </div>
+    <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Analyse des revenus par produit</h2>
+    <canvas id="revenusChart" width="400" height="200"></canvas>
+
+    <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Analyse des coûts par culture</h2>
+    <canvas id="coutsChart" width="400" height="200"></canvas>
+
+    
+   
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="coutsLabelsData" type="application/json">{{ couts_labels|tojson|safe }}</script>
+<script id="coutsValuesData" type="application/json">{{ couts_values|tojson|safe }}</script>
+<script id="revenusLabelsData" type="application/json">{{ revenus_labels|tojson|safe }}</script>
+<script id="revenusValuesData" type="application/json">{{ revenus_values|tojson|safe }}</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/rapports.js') }}"></script>
+{%endblock%}

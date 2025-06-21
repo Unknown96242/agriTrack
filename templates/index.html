@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="px-20 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div class="flex flex-wrap justify-between gap-3 p-4">
+      <div class="flex min-w-72 flex-col gap-3">
+        <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight">Vue d'ensemble de la culture</p>
+        <p class="text-[#51946b] text-sm font-normal leading-normal">Suivez les étapes de croissance, les interventions et le calendrier pour chaque culture.</p>
+      </div>
+    </div>
+    <div class="pb-3">
+    <div class="flex border-b border-[#d1e6d9] px-4 gap-8">
+      {% for parcelle in parcelles %}
+        <a class="flex flex-col items-center justify-center border-b-[3px]
+          {% if parcelle_sel and parcelle_sel.id == parcelle.id %}
+            border-b-[#39e079] text-[#0e1a13]
+          {% else %}
+            border-b-transparent text-[#51946b]
+          {% endif %}
+          pb-[13px] pt-4"
+          href="{{ url_for('index.index', parcelle_id=parcelle.id) }}">
+          <p class="text-sm font-bold leading-normal tracking-[0.015em]">
+            {{ parcelle.nom }}
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+    </div>
+    <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Étapes de croissance</h2>
+    <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
+      <div class="flex flex-col items-center gap-1 pt-3">
+        <div class="text-[#0e1a13]" data-icon="Plant" data-size="24px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M247.63,39.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.49-11.78,43.16-.16,65.74a71.34,71.34,0,0,0-14.17,27L98.33,151c7.82-16.33,7.52-33.35-1-47.49-13.2-21.79-43.67-33.47-81.5-31.25a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,168,54.58,54.58,0,0,0,87,162.33l25,25V216a8,8,0,0,0,16,0V186.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,133.21,250.67,91.65,247.63,39.89ZM47.81,147.6C32.47,138.31,23.79,116.32,24,88c28.32-.24,50.31,8.47,59.6,23.81,4.85,8,5.64,17.33,2.46,26.94L61.65,114.34a8,8,0,0,0-11.31,11.31l24.41,24.41C65.14,153.24,55.82,152.45,47.81,147.6Zm149.31-10.22c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.31L140.65,128c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.82,89.33-34.83C232.94,90.34,220.14,123.44,197.12,137.38Z"
+            ></path>
+          </svg>
+        </div>
+        <div class="w-[1.5px] bg-[#d1e6d9] h-2 grow"></div>
+      </div>
+      <div class="flex flex-1 flex-col py-3">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Semis</p>
+        <p class="text-[#51946b] text-base font-normal leading-normal">{{parcelle_sel.date_semis}}</p>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <div class="w-[1.5px] bg-[#d1e6d9] h-2"></div>
+        <div class="text-[#0e1a13]" data-icon="Plant" data-size="24px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M247.63,39.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.49-11.78,43.16-.16,65.74a71.34,71.34,0,0,0-14.17,27L98.33,151c7.82-16.33,7.52-33.35-1-47.49-13.2-21.79-43.67-33.47-81.5-31.25a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,168,54.58,54.58,0,0,0,87,162.33l25,25V216a8,8,0,0,0,16,0V186.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,133.21,250.67,91.65,247.63,39.89ZM47.81,147.6C32.47,138.31,23.79,116.32,24,88c28.32-.24,50.31,8.47,59.6,23.81,4.85,8,5.64,17.33,2.46,26.94L61.65,114.34a8,8,0,0,0-11.31,11.31l24.41,24.41C65.14,153.24,55.82,152.45,47.81,147.6Zm149.31-10.22c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.31L140.65,128c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.82,89.33-34.83C232.94,90.34,220.14,123.44,197.12,137.38Z"
+            ></path>
+          </svg>
+        </div>
+        <div class="w-[1.5px] bg-[#d1e6d9] h-2 grow"></div>
+      </div>
+      <div class="flex flex-1 flex-col py-3">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Germination</p>
+        <p class="text-[#51946b] text-base font-normal leading-normal">{{parcelle_sel.date_germination}}</p>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <div class="w-[1.5px] bg-[#d1e6d9] h-2"></div>
+        <div class="text-[#0e1a13]" data-icon="Plant" data-size="24px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M247.63,39.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.49-11.78,43.16-.16,65.74a71.34,71.34,0,0,0-14.17,27L98.33,151c7.82-16.33,7.52-33.35-1-47.49-13.2-21.79-43.67-33.47-81.5-31.25a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,168,54.58,54.58,0,0,0,87,162.33l25,25V216a8,8,0,0,0,16,0V186.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,133.21,250.67,91.65,247.63,39.89ZM47.81,147.6C32.47,138.31,23.79,116.32,24,88c28.32-.24,50.31,8.47,59.6,23.81,4.85,8,5.64,17.33,2.46,26.94L61.65,114.34a8,8,0,0,0-11.31,11.31l24.41,24.41C65.14,153.24,55.82,152.45,47.81,147.6Zm149.31-10.22c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.31L140.65,128c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.82,89.33-34.83C232.94,90.34,220.14,123.44,197.12,137.38Z"
+            ></path>
+          </svg>
+        </div>
+        <div class="w-[1.5px] bg-[#d1e6d9] h-2 grow"></div>
+      </div>
+      <div class="flex flex-1 flex-col py-3">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Croissance végétative</p>
+        <p class="text-[#51946b] text-base font-normal leading-normal">{{parcelle_sel.date_croissance_vegetatif}}</p>
+      </div>
+      <div class="flex flex-col items-center gap-1 pb-3">
+        <div class="w-[1.5px] bg-[#d1e6d9] h-2"></div>
+        <div class="text-[#0e1a13]" data-icon="Flower" data-size="24px" data-weight="regular">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path
+              d="M210.35,129.36c-.81-.47-1.7-.92-2.62-1.36.92-.44,1.81-.89,2.62-1.36a40,40,0,1,0-40-69.28c-.81.47-1.65,1-2.48,1.59.08-1,.13-2,.13-3a40,40,0,0,0-80,0c0,.94,0,1.94.13,3-.83-.57-1.67-1.12-2.48-1.59a40,40,0,1,0-40,69.28c.81.47,1.7.92,2.62,1.36-.92.44-1.81.89-2.62,1.36a40,40,0,1,0,40,69.28c.81-.47,1.65-1,2.48-1.59-.08,1-.13,2-.13,2.95a40,40,0,0,0,80,0c0-.94-.05-1.94-.13-2.95.83.57,1.67,1.12,2.48,1.59A39.79,39.79,0,0,0,190.29,204a40.43,40.43,0,0,0,10.42-1.38,40,40,0,0,0,9.64-73.28ZM104,128a24,24,0,1,1,24,24A24,24,0,0,1,104,128Zm74.35-56.79a24,24,0,1,1,24,41.57c-6.27,3.63-18.61,6.13-35.16,7.19A40,40,0,0,0,154.53,98.1C163.73,84.28,172.08,74.84,178.35,71.21ZM128,32a24,24,0,0,1,24,24c0,7.24-4,19.19-11.36,34.06a39.81,39.81,0,0,0-25.28,0C108,75.19,104,63.24,104,56A24,24,0,0,1,128,32ZM44.86,80a24,24,0,0,1,32.79-8.79c6.27,3.63,14.62,13.07,23.82,26.89A40,40,0,0,0,88.81,120c-16.55-1.06-28.89-3.56-35.16-7.18A24,24,0,0,1,44.86,80ZM77.65,184.79a24,24,0,1,1-24-41.57c6.27-3.63,18.61-6.13,35.16-7.19a40,40,0,0,0,12.66,21.87C92.27,171.72,83.92,181.16,77.65,184.79ZM128,224a24,24,0,0,1-24-24c0-7.24,4-19.19,11.36-34.06a39.81,39.81,0,0,0,25.28,0C148,180.81,152,192.76,152,200A24,24,0,0,1,128,224Zm83.14-48a24,24,0,0,1-32.79,8.79c-6.27-3.63-14.62-13.07-23.82-26.89A40,40,0,0,0,167.19,136c16.55,1.06,28.89,3.56,35.16,7.18A24,24,0,0,1,211.14,176Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div class="flex flex-1 flex-col py-3">
+        <p class="text-[#0e1a13] text-base font-medium leading-normal">Floraison</p>
+        <p class="text-[#51946b] text-base font-normal leading-normal">{{parcelle_sel.date_floraison}}</p>
+      </div>
+    </div>
+    <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Calendrier</h2>
+    <div id="calendar-zone">
+
+      {% include "calendar_partial.html" %}
+      
+    </div>
+    <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Interventions</h2>
+    <div class="px-4 py-3 @container">
+      <div class="flex overflow-hidden rounded-lg border border-[#d1e6d9] bg-[#f8fbfa]">
+        <table class="flex-1">
+          <thead>
+            <tr class="bg-[#f8fbfa]">
+              <th class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-120 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">Date</th>
+              <th class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-240 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">Type</th>
+              <th class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-360 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+                Description
+              </th>
+              <th class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-480 px-4 py-3 text-left text-[#0e1a13] w-60 text-sm font-medium leading-normal">Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for intervention in interventions%}
+            <tr class="border-t border-t-[#d1e6d9]">
+              <td class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-120 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">
+                {{intervention.date}}
+              </td>
+              <td class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-240 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">
+                {{intervention.type}}
+              </td>
+              <td class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-360 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">
+                {{intervention.description}}
+              </td>
+              <td class="table-50c825d9-1d73-418b-b770-44d620a94bfa-column-480 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#e8f2ec] text-[#0e1a13] text-sm font-medium leading-normal w-full"
+                >
+                  <span class="truncate">{{intervention.statut}}</span>
+                </button>
+              </td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+      <style>
+                  @container(max-width:120px){.table-50c825d9-1d73-418b-b770-44d620a94bfa-column-120{display: none;}}
+        @container(max-width:240px){.table-50c825d9-1d73-418b-b770-44d620a94bfa-column-240{display: none;}}
+        @container(max-width:360px){.table-50c825d9-1d73-418b-b770-44d620a94bfa-column-360{display: none;}}
+        @container(max-width:480px){.table-50c825d9-1d73-418b-b770-44d620a94bfa-column-480{display: none;}}
+      </style>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function attachCalendarLinks() {
+      document.querySelectorAll('#calendar-zone a').forEach(function(link) {
+        link.addEventListener('click', calendarClickHandler);
+      });
+    }
+
+    function calendarClickHandler(e) {
+      e.preventDefault();
+      fetch(this.href)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('calendar-zone').innerHTML = html;
+          attachCalendarLinks(); // Ré-attache proprement les événements
+        });
+    }
+
+    attachCalendarLinks();
+  });
+</script>
+{%endblock%}

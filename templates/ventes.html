@@ -1,0 +1,60 @@
+{%extends "base.html"%}
+{%block content%}
+<div class="layout-content-container flex flex-col justify-center px-20 flex-1">
+<div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Ventes</p></div>
+<h3 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Résumé des ventes</h3>
+<div class="flex flex-wrap gap-4 p-4">
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
+    <p class="text-[#0e1a13] text-base font-medium leading-normal">Ventes totales</p>
+    <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">{{vente_totale}} fcfa</p>
+    </div>
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
+    <p class="text-[#0e1a13] text-base font-medium leading-normal">Nombre de clients</p>
+    <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">{{nombre_clients}}</p>
+    </div>
+    <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
+    <p class="text-[#0e1a13] text-base font-medium leading-normal">Produits vendus</p>
+    <p class="text-[#0e1a13] tracking-light text-2xl font-bold leading-tight">{{quantite_total}} kg</p>
+    </div>
+</div>
+<h3 class="text-[#0e1a13] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Ventes par produit</h3>
+<div class="px-4 py-3 @container">
+    <div class="flex overflow-hidden rounded-lg border border-[#d1e6d9] bg-[#f8fbfa]">
+    <table class="flex-1">
+        <thead>
+        <tr class="bg-[#f8fbfa]">
+            <th class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-120 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">Produit</th>
+            <th class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-240 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Prix unitaire
+            </th>
+            <th class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-360 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Quantité vendue
+            </th>
+            <th class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-480 px-4 py-3 text-left text-[#0e1a13] w-[400px] text-sm font-medium leading-normal">
+            Revenu total
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for vente in ventes%}
+        <tr class="border-t border-t-[#d1e6d9]">
+            <td class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e1a13] text-sm font-normal leading-normal">{{vente.produit}}</td>
+            <td class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-240 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">
+            {{vente.prix_unitaire}} fcfa/kg
+            </td>
+            <td class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-360 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">{{vente.quantite_vendue}} kg</td>
+            <td class="table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-480 h-[72px] px-4 py-2 w-[400px] text-[#51946b] text-sm font-normal leading-normal">{{vente.revenu_total}} fcfa</td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    </div>
+    <style>
+                @container(max-width:120px){.table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-120{display: none;}}
+    @container(max-width:240px){.table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-240{display: none;}}
+    @container(max-width:360px){.table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-360{display: none;}}
+    @container(max-width:480px){.table-319e2de7-d3cd-42c1-8b0d-c0f1c913115d-column-480{display: none;}}
+    </style>
+</div>
+</div>
+{%endblock%}

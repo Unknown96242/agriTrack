@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="px-20 flex flex-1 justify-center py-5">
+  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div class="flex flex-wrap justify-between gap-3 p-4">
+      <div class="flex min-w-72 flex-col gap-3">
+        <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight">Ajouter un rapport</p>
+        <p class="text-[#51946b] text-sm font-normal leading-normal">Créez un nouveau rapport de production</p>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('rapports.ajout_rapport') }}" class="space-y-6 px-4 py-3">
+      {{ form.hidden_tag() }}
+      <div>
+        {{ form.titre.label(class="block text-[#0e1a13] text-sm font-medium mb-2") }}
+        {{ form.titre(class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent") }}
+        {% if form.titre.errors %}
+          <div class="text-red-500 text-sm mt-1">{{ form.titre.errors[0] }}</div>
+        {% endif %}
+        </div>
+        <div>
+            {{ form.contenu.label(class="block text
+-[#0e1a13] text-sm font-medium mb-2") }}
+            {{ form.contenu(class="form-textarea w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent h-32") }}
+            {% if form.contenu.errors %}
+              <div class="text-red-500 text-sm mt-1">{{ form.contenu.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div>
+            {{ form.date_generation.label(class="block text
+[#0e1a13] text-sm font-medium mb-2") }}
+            {{ form.date_generation(class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent") }}
+            {% if form.date_generation.errors %}
+              <div class="text-red-500 text-sm mt-1">{{ form.date_generation.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div>
+          {{ form.submit(class="bg-[#39e079] hover:bg-[#2ecc71] text-white font-bold py-2 px-4 rounded transition-colors duration-200") }}
+        </div>
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}
