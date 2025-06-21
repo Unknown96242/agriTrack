@@ -1,23 +1,22 @@
-<!-- <div>
-        {{ form.nom.label(class="block text-[#0e1a13] text-sm font-medium mb-2") }}
-        {{ form.nom(class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent") }}
-        {% if form.nom.errors %}
-          <div class="text-red-500 text-sm mt-1">{{ form.nom.errors[0] }}</div>
-        {% endif %}
-        </div>
-        <div>
-            {{ form.type.label(class="block text
--[#0e1a13] text-sm font-medium mb-2") }}
-            {{ form.type(class="form-textarea w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent h-32") }}
-            {% if form.type.errors %}
-              <div class="text-red-500 text-sm mt-1">{{ form.type.errors[0] }}</div>
-            {% endif %}
-        </div>
-        <div>
-            {{ form.date_generation.label(class="block text
-[#0e1a13] text-sm font-medium mb-2") }}
-            {{ form.date_generation(class="form-input w-full rounded-lg border border-[#d1e6d9] bg-[#f8fbfa] text-[#0e1a13] placeholder:text-[#51946b] focus:outline-none focus:ring-2 focus:ring-[#39e079] focus:border-transparent") }}
-            {% if form.date_generation.errors %}
-              <div class="text-red-500 text-sm mt-1">{{ form.date_generation.errors[0] }}</div>
-            {% endif %}
-        </div> -->
+1) Installer toute les dependances necessaires a ce projet dans votre environnement viretuel 
+Dependances necessaires : -flask
+                          -flask_migrate
+                          -flask_sqlalchemy
+                          -flask_wtf
+                          -psycopg2
+                          -sqlalchemy
+                          -wtforms
+                          -Blueprint
+                          -python-dotenv
+
+
+2) Creer un fichier .env a la racine du projet et y mettre les variables d'environnement suivantes :
+DATABASE_URL=postgresql://<username>:<password>@localhost:5432/<database_name>
+SECRET_KEY=<votre_cle_secrete>
+
+# Instructions pour configurer le projet Flask avec PostgreSQL
+3) Creer la base de donnees dans votre serveur PostgreSQL avec le nom que vous avez defini dans la variable d'environnement DATABASE_URL
+4) Initialiser la base de donnees avec les commandes suivantes :
+flask db init
+flask db migrate
+flask db upgrade
