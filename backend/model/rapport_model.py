@@ -9,6 +9,8 @@ class Rapport(db.Model):
     titre = db.Column(db.String(200))
     contenu = db.Column(db.Text)
     date_generation = db.Column(db.Date)
+    utilisateur_id = db.Column(db.Integer, db.ForeignKey('utilisateurs.id')) 
+
 
     def __repr__(self):
         return f"<Rapport {self.titre} - {self.date_generation}>"

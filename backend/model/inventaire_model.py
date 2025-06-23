@@ -1,7 +1,7 @@
 from flask import Flask
 from backend.config.connexion import db, init_db
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 class Inventaire(db.Model):
     __tablename__ = 'inventaire'
@@ -13,6 +13,8 @@ class Inventaire(db.Model):
     date_achat = db.Column(db.Date)
     prix_unitaire = db.Column(db.Numeric(10, 2))
     valeur_totale = db.Column(db.Numeric(10, 2))
+    utilisateur_id = db.Column(db.Integer, db.ForeignKey('utilisateurs.id')) 
+
 
     def __repr__(self):
         return f"<Inventaire {self.nom} ({self.type}) - {self.quantite} {self.unite}>"

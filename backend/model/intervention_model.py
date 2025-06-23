@@ -12,6 +12,8 @@ class Intervention(db.Model):
     description = db.Column(db.Text)
     statut = db.Column(db.String(50))
     parcelle = db.relationship('Parcelle', backref='interventions')
+    utilisateur_id = db.Column(db.Integer, db.ForeignKey('utilisateurs.id')) 
+
 
     def __repr__(self):
         return f"<Intervention {self.type} sur parcelle {self.parcelle_id} le {self.date}>"

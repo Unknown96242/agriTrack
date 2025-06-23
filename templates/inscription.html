@@ -1,0 +1,118 @@
+{% extends "base_auth.html" %}
+{% block titre %}Inscription - AgriTrack{% endblock %}
+
+{% block formulaire %}
+<div class="w-full md:w-1/2 p-8">
+    <div class="flex justify-center mb-6 md:hidden">
+        <i class="fas fa-leaf text-green-500 text-4xl"></i>
+    </div>
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Inscription</h1>
+    
+    <form id="registerForm" method="POST" action="{{ url_for('auth.inscription') }}" class="space-y-6">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" id="firstName" name="prenom" required 
+                            class="input-focus pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition duration-300"
+                            placeholder="Votre prénom" value="{{ request.form.prenom or '' }}">
+                </div>
+            </div>
+            <div>
+                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" id="lastName" name="nom" required 
+                            class="input-focus pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition duration-300"
+                            placeholder="Votre nom" value="{{ request.form.nom or '' }}">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" id="email" name="email" required 
+                        class="input-focus pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition duration-300"
+                        placeholder="votre@email.com" value="{{ request.form.email or '' }}">
+            </div>
+        </div>
+        
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-lock text-gray-400"></i>
+                </div>
+                <input type="password" id="password" name="password" required 
+                        class="input-focus pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition duration-300"
+                        placeholder="••••••••">
+                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <i class="fas fa-eye text-gray-400 hover:text-gray-600 cursor-pointer"></i>
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirmer le mot de passe</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-lock text-gray-400"></i>
+                </div>
+                <input type="password" id="confirmPassword" name="confirm_password" required 
+                        class="input-focus pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition duration-300"
+                        placeholder="••••••••">
+                <button type="button" id="toggleConfirmPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <i class="fas fa-eye text-gray-400 hover:text-gray-600 cursor-pointer"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex items-center">
+            <input id="terms" name="terms" type="checkbox" required
+                    class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
+            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                J'accepte les <a href="#" class="text-green-600 hover:underline">conditions générales</a>
+            </label>
+        </div>
+        
+        <div>
+            <button type="submit"
+                    class="btn-hover w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 transform">
+                S'inscrire
+            </button>
+        </div>
+    </form>
+    
+    <div class="mt-6">
+        <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+                <span class="px-2 bg-white text-gray-500">
+                    Déjà un compte?
+                </span>
+            </div>
+        </div>
+        
+        <div class="mt-6">
+            <a href="{{ url_for('auth.connexion') }}" class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
+                Se connecter
+            </a>
+        </div>
+    </div>
+    
+    <div class="mt-8 text-center text-xs text-gray-500">
+        <p>En vous connectant, vous acceptez nos <a href="#" class="text-green-600 hover:underline">Conditions d'utilisation</a> et notre <a href="#" class="text-green-600 hover:underline">Politique de confidentialité</a>.</p>
+    </div>
+</div>
+{% endblock %}

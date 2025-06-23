@@ -18,7 +18,7 @@
       <div class="layout-container flex h-full grow flex-col">
         <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e8f2ec] px-10 py-3">
           <div class="flex items-center gap-8">
-            <a class="flex items-center gap-4 text-[#0e1a13]" href="{{url_for('index.index')}}">
+            <a class="flex items-center gap-4 text-[#0e1a13] relative group" href="{{url_for('index.index')}}">
               <div class="size-4">
                 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
@@ -74,10 +74,16 @@
                 />
               </div>
             </label>
-            <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXkxPRFRYlk_kiV-hcOmKCSjv0Cs8e-UbXDBkPPJPj35KKxqfoA33XiEP017EAvprqcgl0cI8AK9rGPCAcv9W9WU4D5MNoWoDXfnN4eFhTGzeXh7rs7uEnuJ_kaff6LqBfy6iD_1786F1di3DufZ5OOMVtPrROAekP74XbMZmM8dqjmgT1-huViYtOWD2NHw-JwliwpUFGhU-gVZobkubeGhceza_A8hvDHlU_luuKScbgfZsssKHWV58vDlVf7I86mBcWFDSK6w");'
-            ></div>
+            <div class="relative group">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXkxPRFRYlk_kiV-hcOmKCSjv0Cs8e-UbXDBkPPJPj35KKxqfoA33XiEP017EAvprqcgl0cI8AK9rGPCAcv9W9WU4D5MNoWoDXfnN4eFhTGzeXh7rs7uEnuJ_kaff6LqBfy6iD_1786F1di3DufZ5OOMVtPrROAekP74XbMZmM8dqjmgT1-huViYtOWD2NHw-JwliwpUFGhU-gVZobkubeGhceza_A8hvDHlU_luuKScbgfZsssKHWV58vDlVf7I86mBcWFDSK6w");'
+              ></div>
+              <div class="hidden group-hover:block absolute right-0 mt-2 z-50 bg-white border border-gray-200 rounded shadow-lg min-w-[160px]">
+                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mon compte</a>
+                <a href="{{ url_for('auth.logout') }}" class="block px-4 py-2 text-red-600 hover:bg-gray-100">Se déconnecter</a>
+              </div>
+            </div>
           </div>
         </header>
         {%block content%}

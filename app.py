@@ -1,12 +1,10 @@
 from flask import Flask, render_template
 from backend.config.connexion import db, init_db
-from routes import index_bp, inventaires_bp, rapports_bp, previsions_bp, ventes_bp, dashboard_bp
+from routes import auth_bp, index_bp, inventaires_bp, rapports_bp, previsions_bp, ventes_bp, dashboard_bp
 from sqlalchemy import text
 from flask_migrate import Migrate
 import os
 from dotenv import load_dotenv
-
-# ... après avoir créé app et db ...
 
 
 app = Flask(__name__)
@@ -20,7 +18,8 @@ with app.app_context():
         print("Connexion à la base de données réussie !")
     except Exception as e:
         print("Erreur de connexion à la base de données :", e)
-
+        
+app.register_blueprint(auth_bp)
 app.register_blueprint(index_bp)
 app.register_blueprint(inventaires_bp)
 app.register_blueprint(previsions_bp)

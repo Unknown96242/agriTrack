@@ -2,7 +2,13 @@
 {%block content%}
 <div class="px-20 flex flex-1 justify-center py-5">
     <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-    <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Tableau de bord</p></div>
+    <div class="flex flex-wrap justify-between gap-3 p-4">
+        <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Tableau de bord</p>
+        <a href="{{ url_for('dashboard.ajout_parcelle') }}"
+           class="bg-[#39e079] hover:bg-[#2ecc71] text-white font-bold py-2 px-4 rounded transition-colors duration-200 h-fit self-center">
+            + Ajouter une parcelle
+        </a>
+    </div>
     <div class="flex flex-wrap gap-4 p-4">
         <div class="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 bg-[#e8f2ec]">
         <p class="text-[#0e1a13] text-base font-medium leading-normal">Superficie totale</p>

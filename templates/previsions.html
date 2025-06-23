@@ -1,15 +1,21 @@
-{%extends "base.html"%}
-{%block content%}
+{% extends "base.html" %}
+{% block content %}
 <div class="px-20 flex flex-1 justify-center py-5">
     <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-        <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Previsions</p></div>
-        {%for prevision in previsions%}
-        <h2 class="text-[#0e1a13] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">{{prevision.date}}</h2>
-        <p class="text-[#0e1a13] text-base font-normal leading-normal pb-3 pt-1 px-4">
-        {{prevision.type}}: {{prevision.valeur}}
-        </p>
-        {%endfor%}
+        <div class="flex flex-wrap justify-between gap-3 p-4">
+            <p class="text-[#0e1a13] tracking-light text-[32px] font-bold leading-tight min-w-72">Prévisions météo</p>
+        </div>
+        <div class="bg-[#f8fbfa] rounded-lg shadow p-6 mx-4">
+            <ul class="space-y-2">
+                {% for prevision in previsions %}
+                <li class="flex justify-between items-center border-b border-[#d1e6d9] pb-2 last:border-b-0">
+                    <span class="font-semibold text-[#0e1a13]">{{ prevision.type }}</span>
+                    <span class="text-[#51946b]">{{ prevision.valeur }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
-{%endblock%}
-      
+{% endblock %}
+

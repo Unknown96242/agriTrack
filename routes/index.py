@@ -3,12 +3,14 @@ from backend.model import Parcelle, Intervention
 from calendar import monthrange
 from datetime import date
 import calendar
+from flask import session
 
 index_bp = Blueprint("index", __name__)
-@index_bp.route('/')
+@index_bp.route('/index.html')
 def index():
-    interventions = Intervention.query.all()
-    parcelles = Parcelle.query.all()
+    current_user = session.get('current_user')
+    interventions = Intervention.query.filter_by(utilisateur_id=current_user).all()
+    parcelles = Parcelle.query.filter_by(utilisateur_id=current_user).all()
     parcelle_id = request.args.get('parcelle_id', type=int)
     parcelle_sel = Parcelle.query.get(parcelle_id) if parcelle_id else parcelles[0] if parcelles else None
     semis = parcelle_sel.date_semis

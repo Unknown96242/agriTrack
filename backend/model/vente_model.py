@@ -1,5 +1,5 @@
 from flask import Flask
-from backend.config.connexion import db, init_db
+from backend.config.connexion import db
 
 app = Flask(__name__)
 
@@ -14,6 +14,8 @@ class Vente(db.Model):
     unite = db.Column(db.String(20))
     revenu_total = db.Column(db.Numeric(10, 2))
     date_vente = db.Column(db.Date)
+    utilisateur_id = db.Column(db.Integer, db.ForeignKey('utilisateurs.id')) 
+
 
     def __repr__(self):
         return f"<Vente {self.produit} - {self.quantite_vendue}{self.unite} - {self.revenu_total}€>"

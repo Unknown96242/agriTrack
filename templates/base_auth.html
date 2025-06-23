@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titre %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-agri-pattern {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2IiBoZWlnaHQ9IjYiPgo8cmVjdCB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSIjZmZmZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMNiA2WiIgc3Ryb2tlLXdpZHRoPSIwLjUiIHN0cm9rZT0iI2VlZWVlZSI+PC9wYXRoPgo8cGF0aCBkPSJNNiAwTDAgNloiIHN0cm9rZS13aWR0aD0iMC41IiBzdHJva2U9IiNlZWVlZWUiPjwvcGF0aD4KPC9zdmc+');
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 2px rgba(74, 163, 80, 0.5);
+        }
+        .btn-hover:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 163, 80, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center bg-agri-pattern">
+    <div class="max-w-md w-full mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-3xl">
+        <div class="md:flex">
+            <!-- Image côté gauche (visible uniquement sur desktop) -->
+            <div class="hidden md:block md:w-1/2 bg-gradient-to-br from-green-500 to-green-700 p-8 flex flex-col justify-center">
+                <div class="text-center">
+                    <i class="fas fa-tractor text-white text-6xl mb-6"></i>
+                    <h2 class="text-2xl font-bold text-white mb-2">AgriTrack</h2>
+                    <p class="text-green-100">Optimisez votre exploitation agricole avec notre solution complète de gestion.</p>
+                </div>
+                <div class="mt-8 text-green-100 text-sm">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>Suivi des cultures en temps réel</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>Gestion des stocks et inventaire</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>Analyse des rendements</span>
+                    </div>
+                </div>
+            </div>
+
+            {%block formulaire%}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function setupPasswordToggle(buttonId, inputId) {
+            document.getElementById(buttonId).addEventListener('click', function() {
+                const passwordInput = document.getElementById(inputId);
+                const icon = this.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        }
+
+        
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {        
+            
+            // Simulation de chargement
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Inscription en cours...';
+            
+        });
+    </script>
+</body>
+</html>
