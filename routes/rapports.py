@@ -19,7 +19,6 @@ def rapports():
     # Filtrer par utilisateur_id
     couts_par_culture = (
         db.session.query(Parcelle.culture, func.sum(Inventaire.valeur_totale))
-        .join(Parcelle, Parcelle.id == Inventaire.parcelle_id)  # adapte la jointure selon ta structure
         .filter(Inventaire.utilisateur_id == current_user)
         .filter(extract('month', Inventaire.date_achat) == mois if mois else True)
         .filter(extract('year', Inventaire.date_achat) == annee if annee else True)
@@ -102,7 +101,7 @@ def ajout_rapport():
             titre=form.titre.data,
             contenu=form.contenu.data,
             date_generation=form.date_generation.data,
-            utilisateur_id=current_user  # Associer le rapport à l'utilisateur connecté
+            utilisateur_id=current_user  
         )
         db.session.add(nouveau_rapport)
         db.session.commit()
