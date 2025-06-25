@@ -105,5 +105,5 @@ Déconnexion
 
 AUTEURS
 Projet réalisé par : -TCHIKAYA BERY Ray Emilien
-                     -STAKYS OBIANG
+                     -STACKYS OBIANG
                      - KABA Keita

@@ -14,7 +14,7 @@ def connexion():
 
         # Recherche de l'utilisateur dans la base
         user = Utilisateur.query.filter_by(email=email).first()
-        if user and user.check_password(password):  # check_password doit être défini dans ton modèle
+        if user and user.check_password(password):
             session['current_user'] = user.id
             flash("Connexion réussie.", "success")
             return redirect(url_for('index.index'))

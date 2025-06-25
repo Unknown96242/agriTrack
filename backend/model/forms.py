@@ -34,7 +34,7 @@ class AjoutMaterielForm(FlaskForm):
     )
     quantite = FloatField(
         "Quantité",
-        validators=[DataRequired(), Length(max=10)],
+        validators=[DataRequired()],
         render_kw={"placeholder": "Quantité"}
     )
     unite = StringField(
@@ -50,7 +50,7 @@ class AjoutMaterielForm(FlaskForm):
     )
     prix_unitaire = FloatField(
         "Prix unitaire",
-        validators=[DataRequired(), Length(max=10)],
+        validators=[DataRequired()],
         render_kw={"placeholder": "Prix unitaire"}
     )
     submit = SubmitField("Ajouter")
