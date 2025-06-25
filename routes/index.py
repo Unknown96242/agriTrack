@@ -4,11 +4,15 @@ from calendar import monthrange
 from datetime import date
 import calendar
 from flask import session
+from flask import redirect, url_for
 
 index_bp = Blueprint("index", __name__)
 @index_bp.route('/index.html')
 def index():
     current_user = session.get('current_user')
+    if session.get('current_user') is None:
+        return redirect(url_for('auth.connexion'))
+    
     interventions = Intervention.query.filter_by(utilisateur_id=current_user).all()
     parcelles = Parcelle.query.filter_by(utilisateur_id=current_user).all()
     parcelle_id = request.args.get('parcelle_id', type=int)
