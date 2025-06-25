@@ -1,10 +1,13 @@
 import requests
 from flask import render_template, Blueprint
+from flask import session, redirect, url_for
 
 previsions_bp = Blueprint('previsions', __name__)
 
 @previsions_bp.route('/previsions.html')
 def previsions():
+    if session.get('current_user') is None:
+        return redirect(url_for('auth.connexion'))
     api_key = "234b98945460ba88c68738ebbe90ef2e"
     lat = "14.693425"
     long = "-17.447938"
