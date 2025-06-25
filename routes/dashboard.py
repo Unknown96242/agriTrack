@@ -8,6 +8,9 @@ dashboard_bp = Blueprint("dashboard", __name__)
 @dashboard_bp.route('/dashboard.html')
 def dashboard():
     current_user = session.get('current_user')
+    if session.get('current_user') is None:
+        return redirect(url_for('auth.connexion'))
+    
     ventes = Vente.query.filter_by(utilisateur_id=current_user).all()
     clients = Client.query.filter_by(utilisateur_id=current_user).all()
     parcelles = Parcelle.query.filter_by(utilisateur_id=current_user).all()    
@@ -28,6 +31,7 @@ def ajout_parcelle():
     if not current_user:
         flash("Vous devez être connecté pour ajouter une parcelle.", "danger")
         return redirect(url_for('auth.connexion'))
+    
     if request.method == 'POST':
         nom = request.form.get('nom')
         superficie = request.form.get('superficie')
